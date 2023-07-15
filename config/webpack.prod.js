@@ -5,6 +5,7 @@ const commonConfig = require('./webpack.common');
 
 const prodConfig = {
   mode: 'production',
+  entry: './src/App.js',
   output: {
     filename: '[name].[contenthash].js',
     publicPath: '/myva_cricket/latest/',
@@ -14,7 +15,7 @@ const prodConfig = {
       name: 'myva_cricket',
       filename: 'remoteEntry.js',
       exposes: {
-        './CricketIndex': './src/bootstrap',
+        './CricketIndex': './src/App.js',
       },
       shared: packageJson.dependencies,
     }),
