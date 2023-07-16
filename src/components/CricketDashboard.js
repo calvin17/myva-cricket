@@ -1,23 +1,23 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import { useQuery } from '@tanstack/react-query';
+// import { useQuery } from '@tanstack/react-query';
 
 export default function CricketDashboard() {
   const [value, setValue] = React.useState(0);
 
-  const { isLoading, error, data } = useQuery({
-    queryKey: ['repoData'],
-    queryFn: () =>
-      fetch('https://api.cricapi.com/v1/series?apikey=c6a7ccd5-cae4-47b3-9b81-e475ad88a039&offset=0').then(
-        (res) => {
-          console.log(res.json());
-        }
-      ),
-  });
+  // const { isLoading, error, data } = useQuery({
+  //   queryKey: ['repoData'],
+  //   queryFn: () =>
+  //     fetch('https://api.cricapi.com/v1/series?apikey=c6a7ccd5-cae4-47b3-9b81-e475ad88a039&offset=0').then(
+  //       (res) => {
+  //         console.log(res.json());
+  //       }
+  //     ),
+  // });
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -49,19 +49,13 @@ export default function CricketDashboard() {
       {/* <Link to="/match-info">Match Info</Link> */}
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="Matches" />
-          <Tab label="News" />
-          <Tab label="Series Search" />
+          <Tab label="Series List" index={0} component={Link} to={'/cricket'} />
+          <Tab label="Live Matches" index={1} component={Link} to={'/cricket/live'} />
+          <Tab label="Search Series" index={2} component={Link} to={'/cricket/search'} />
         </Tabs>
       </Box>
-      <CustomTabPanel value={value} index={0}>
-        Matches
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={1}>
-        News
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={2}>
-        Series Search
+      <CustomTabPanel value={value} index={value}>
+        <Outlet />
       </CustomTabPanel>
     </React.Fragment>
   );
