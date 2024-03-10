@@ -48,7 +48,7 @@ export default function CricketDashboard() {
       {/* <Link to="/">Home</Link> */}
       {/* <Link to="/match-info">Match Info</Link> */}
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+        <Tabs value={value} onChange={handleChange} aria-label="cricket tabs">
           <Tab label="Series List" index={0} component={Link} to={'/cricket'} />
           <Tab label="Live Matches" index={1} component={Link} to={'/cricket/live'} />
           <Tab label="Search Series" index={2} component={Link} to={'/cricket/search'} />
